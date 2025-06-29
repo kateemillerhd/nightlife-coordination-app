@@ -27,3 +27,11 @@ Create a `.env` file with the following:
 YELP_API_KEY=your_yelp_api_key
 MONGO_URI=your_mongo_connection_string
 SESSION_SECRET=your_secret_here
+```
+
+## Acknowledgements
+
+- Powered by the [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3)
+- This project is part of the [freeCodeCamp](https://www.freecodecamp.org/) curriculum
+
+
