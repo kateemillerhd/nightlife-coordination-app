@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Bar = require('../models/Bar');
 
 const searchBars = async (req, res) => {
   const location = req.query.location;
@@ -35,6 +36,22 @@ const searchBars = async (req, res) => {
     console.error('Yelp API error:', err.response?.data || err.message);
     res.status(500).json({ error: 'Failed to fetch data from Yelp' });
   }
+};
+
+const upsertBar = async (yelpBar) => {
+  let bar = await Bar.findOne({ yelpId: yelpBar.id });
+  if (!bar) {
+    bar = new Bar({
+      yelpId: yelpBar.id,
+      name: yelpBar.name,
+      location: yelpBar.location.display_address.join(', '),
+      image_url: yelpBar.image_url,
+      url: yelpBar.url,
+      attendees: []
+    });
+    await bar.save();
+  }
+  return bar;
 };
 
 module.exports = {
