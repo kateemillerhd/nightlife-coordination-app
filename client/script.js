@@ -11,11 +11,11 @@ async function auth(endpoint) {
 
   const result = await res.json();
   if (res.ok) {
-    document.getElementById('login-status').textContent = `Logged in as ${result.user}`;
+    document.getElementById('login-status').textContent = `Logged in as ${result.user}`;/
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('search-form').style.display = 'block';
   } else {
-    document.getElementById('login-status').textContent = result.err;
+    document.getElementById('login-status').textContent = result.error;
   }
 }
 
