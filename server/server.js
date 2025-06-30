@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('client'));
 
 app.use(
   session({
@@ -35,4 +36,8 @@ app.use('/api', require('./routes/api'));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/client/index.html');
 });
