@@ -54,6 +54,53 @@ const upsertBar = async (yelpBar) => {
   return bar;
 };
 
+const toggleAttendance = async (req, res) => {
+  const yelpId = req.params.yelpId;
+  const username = req.session.username;
+
+  if (!username) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
+
+  try {
+    let bar = await Bar.findOne({ yelpId });
+    if (!bar) {
+      const { name, location, image_url, url } = req.body;
+
+      if (!name || !location || !image_url || !url) {
+        return res.status(400).json({ error: 'Missing bar data to create new entry' });
+      }
+
+      bar = new Bar({
+        yelpId,
+        name,
+        location,
+        image_url,
+        url,
+        attendees: []
+      });
+    }
+
+    const alreadyGoing = bar.attendees.includes(username);
+    if (alreadyGoing) {
+      bar.attendees = bar.attendees.filter(user => user !== username);
+    } else {
+      bar.attendees.push(username);
+    }
+
+    await bar.save();
+
+    res.json({
+      message: alreadyGoing ? 'Removed from bar' : 'Added to bar',
+      bar
+    });
+  } catch (err) {
+    console.error('Error in toggleAttendance:', err);
+    res.status(500).json({ error: 'Failed to update attendance' });
+  }
+};
+
 module.exports = {
-  searchBars
+  searchBars,
+  toggleAttendance
 };
