@@ -32,6 +32,16 @@ app.get('/', (req, res) => {
   res.send('Nightlife Coordination App is running');
 });
 
+app.post('/login', (req, res) => {
+  const { username } = req.body;
+  if (!username) {
+    return res.status(400).json({ error: 'Missing username' });
+  }
+
+  req.session.username = username;
+  res.json({ message: 'Logged in', user: username });
+});
+
 app.use('/api', require('./routes/api'));
 
 app.listen(PORT, () => {

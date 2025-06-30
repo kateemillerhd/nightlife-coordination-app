@@ -8,7 +8,15 @@
   </head>
   <body>
     <h1>Nightlife Coordination App</h1>
-    <form id="search-form">
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Enter your username" required />
+      <button type="submit">Login</button>
+    </form>
+    <p id="login-status"></p>
+
+    <hr>
+    
+    <form id="search-form" style="display:none;">
       <input type="text" id="location" placeholder="Enter a city..." required />
       <button type="submit">Search Bars</button>
     </form>
