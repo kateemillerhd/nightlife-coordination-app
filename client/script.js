@@ -49,6 +49,7 @@ document.getElementById('search-form').addEventListener('submit', async (e) => {
       <img src="${bar.image_url}" alt="${bar.name}" width="200" />
       <p><a href="${bar.url}" target="_blank">View on Yelp</a></p>
       <button class="attend" data-id="${bar.id}">I'm going</button>
+      <p><strong>Attendees:</strong> <span id="count-${bar.id}">${bar.attendees}</span></p>
       <div class="status" id="status-${bar.id}"></div>
       `;
       barList.appendChild(barDiv);
