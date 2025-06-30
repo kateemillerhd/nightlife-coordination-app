@@ -40,5 +40,7 @@ router.get('/search', async (req, res) => {
 });
 
 router.post('/bars/:yelpId/attend', toggleAttendance);
+const attendees = await User.countDocuments({ attending: yelpId });
+res.json({ message, attendees });
 
 module.exports = router;
