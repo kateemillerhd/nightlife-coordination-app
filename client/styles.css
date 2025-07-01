@@ -1,16 +1,126 @@
 body {
-  font-family: "Courier New", sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-family: "Rockwell", sans-serif;
   padding: 20px;
-  background: #f4f4f4;
+  background-color: #373854;
+  color: #e86af0;
+  text-align: center;
+}
+
+#username {
+  border-radius: 7px;
+  height: 25px;
+  background-color: #373854;
+  border: 3px solid #7bb3ff;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  color: #9e379f;
+  font-weight: bold;
+}
+
+#username::placeholder {
+  color: #9e379f;
+  font-family: "Rockwell";
+  font-weight: bold;
+}
+
+#password {
+  border-radius: 7px;
+  height: 25px;
+  background-color: #373854;
+  border: 3px solid #7bb3ff;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  color: #9e379f;
+  font-weight: bold;
+}
+
+#password::placeholder {
+  color: #9e379f;
+  font-family: "Rockwell";
+  font-weight: bold;
+}
+
+#login-btn {
+  font-family: "Rockwell";
+  background-color: #9e379f;
+  color: #493267;
+  padding: 10px;
+  font-weight: bold;
+  border: 3px solid #7bb3ff;
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+#register-btn {
+  font-family: "Rockwell";
+  background-color: #9e379f;
+  color: #493267;
+  padding: 10px;
+  font-weight: bold;
+  border: 3px solid #7bb3ff;
+  border-radius: 7px;
+  margin-left: 10px;
+}
+
+#login-btn:hover {
+  cursor: pointer;
+}
+
+#register#btn:hover {
+  cursor: pointer;
+}
+
+#location {
+  border-radius: 7px;
+  border: 3px solid #7bb3ff;
+  padding: 10px;
+  background-color: #493267;
+  color: #e86af0;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#location::placeholder {
+  font-weight: bold;
+  font-family: "Rockwell";
+  color: #9e379f;
+}
+
+#search-btn {
+  border-radius: 7px;
+  border: 3px solid #7bb3ff;
+  font-family: "Rockwell";
+  font-weight: bold;
+  background-color: #493267;
+  color: #e86af0;
+  padding: 10px;
+}
+
+#search-btn:hover {
+  cursor: pointer;
 }
 
 #bar-list > div {
-  background: white;
+  background: #7bb3ff;
   margin: 10px 0;
   padding: 10px;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: #493267;
+  font-weight: bold;
 }
 button.attend {
   margin-top: 10px;
+}
+
+#going {
+  border-radius: 7px;
+  font-weight: bold;
+  font-family: "Rockwell";
+  padding: 10px;
+  border: 3px solid #493267;
+  background-color: #7bb3ff;
+  color: #493267;
 }
