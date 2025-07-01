@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { searchBars, toggleAttendance } = require('../controllers/barsController');
+const barsController = require('../controllers/barsController');
 const User = require('../models/User');
+const axios = require('axios');
 
 router.get('/search', async (req, res) => {
   const location = req.query.location;
@@ -18,7 +19,7 @@ router.get('/search', async (req, res) => {
     const businesses = response.data.businesses;
 
     const barsWithCounts = await Promise.all(
-      businessses.map(async (bar) => {
+      businesses.map(async (bar) => {
         const count = await User.countDocuments({ attending: bar.id });
         return {
           id: bar.id,
@@ -39,8 +40,29 @@ router.get('/search', async (req, res) => {
   }
 });
 
-router.post('/bars/:yelpId/attend', toggleAttendance);
+router.post('/bars/:yelpId/attend', async (req, res) => {
+  const yelpId = req.params.yelpId;
+  const user = await User.findOne({ username: req.session.username });
+
+  if (!user) {
+    return res.status(401).json({ message: 'Not logged in' });
+  }
+
+  const alreadyGoing = user.attending.includes(yelpId);
+
+  let message;
+  if (alreadyGoing) {
+    user.attending = user.attending.filter(id => id !== yelpId);
+    await user.save();
+    let message = 'You are no longer attending';
+  } else {
+    user.attending.push(yelpId);
+    await user.save();
+    let message = 'You are now attending';
+  }
+  
 const attendees = await User.countDocuments({ attending: yelpId });
 res.json({ message, attendees });
-
+});
+  
 module.exports = router;

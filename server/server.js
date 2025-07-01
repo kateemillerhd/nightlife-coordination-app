@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const User = require("./models/User");
+const apiRoutes = require('./routes/api');
 
 const apiKey = process.env.YELP_API_KEY;
 const mongoUri = process.env.MONGO_URI;
@@ -81,7 +82,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.use("/api", require("./routes/api"));
+app.use("/api", apiRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
